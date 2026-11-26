@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>공연 관리 | HANDONG CLUBBOX</title>
+    <link rel="stylesheet" href="../static/assets/css/style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="admin-sidebar">
+        <div class="admin-brand">H U · HANDONG</div>
+        <p class="admin-subtitle">동아리 공연 플랫폼<br>관리자 페이지</p>
+        <nav class="admin-nav"><a href="index.html">공연 목록으로</a><a class="active" href="admin.html">공연 관리</a><a
+                href="mypage.html">내 예매 내역</a></nav>
+    </aside>
+    <div class="admin-body">
+        <header class="admin-top"><span class="pill">관리자 페이지</span><span class="admin-user" id="admin-identity"></span>
+        </header>
+        <main class="admin-main">
+            <div class="admin-heading">
+                <div><h1>공연 관리</h1>
+                    <p>내 동아리의 공연을 등록·수정·삭제할 수 있습니다.</p></div>
+                <button class="btn btn-primary" id="new-performance">+ 공연 등록</button>
+            </div>
+            <div class="panel filter-row"><input class="input" id="performance-search" placeholder="공연명으로 검색"
+                                                 aria-label="공연명 검색"><select class="select" id="venue-filter"
+                                                                             aria-label="공연장 필터">
+                <option value="">전체 장소</option>
+                <option value="chapel">효암채플</option>
+                <option value="auditorium">오석관 대강당</option>
+                <option value="theater">학생회관 소극장</option>
+            </select></div>
+            <div class="panel table-wrap">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>공연</th>
+                        <th>날짜</th>
+                        <th>장소</th>
+                        <th>회차</th>
+                        <th>예매 현황</th>
+                        <th>작업</th>
+                    </tr>
+                    </thead>
+                    <tbody id="admin-rows"></tbody>
+                </table>
+            </div>
+            <p class="small-caption" id="admin-count" style="margin-top:12px"></p>
+            <button class="link-action" id="reset-data" style="margin-top:20px">데모 데이터 초기화</button>
+        </main>
+    </div>
+</div>
+<div id="admin-modal-holder"></div>
+<script type="module" src="../static/assets/js/pages/admin.js"></script>
+</body>
+</html>
