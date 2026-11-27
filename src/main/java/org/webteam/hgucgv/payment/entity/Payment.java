@@ -1,6 +1,7 @@
-package org.webteam.hgucgv.entity;
+package org.webteam.hgucgv.payment.entity;
 
 import jakarta.persistence.*;
+import org.webteam.hgucgv.reservation.entity.Reservation;
 
 import java.time.LocalDateTime;
 
@@ -86,5 +87,24 @@ public class Payment {
     //  Toss 취소환불 성공
     public void markCanceled() {
         this.status = PaymentStatus.CANCELED;
+    }
+
+    protected Payment() {
+    }
+
+    public Payment(
+            Reservation reservation,
+            String orderId,
+            int amount
+    ) {
+        this.reservation = reservation;
+        this.orderId = orderId;
+        this.amount = amount;
+        this.status = PaymentStatus.READY;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 }

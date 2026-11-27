@@ -1,10 +1,18 @@
 package org.webteam.hgucgv.performance.entity;
 
 import jakarta.persistence.*;
+import org.webteam.hgucgv.Attachment.entity.Attachment;
 import org.webteam.hgucgv.club.entity.Club;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "performances")
+/*
+공연 회차와는 다른 entity
+공연 전반적인 내용을 다루고 각 공연 회차는 PerformanceSession으로 정한다.
+ */
 public class Performance {
 
     @Id
@@ -15,6 +23,9 @@ public class Performance {
     @JoinColumn(name = "club_id", nullable = false)
     private Club club;
 
+    @OneToMany(mappedBy = "performance")
+    private List<PerformanceSession> sessions = new ArrayList<>();
+
     @Column(nullable = false, length = 150)
     private String title;
 
@@ -24,11 +35,14 @@ public class Performance {
     @Column(nullable = false)
     private int price;
 
-    @Column(length = 500)
-    private String posterPath;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "poster_attachment_id", unique = true)
+    private Attachment poster;
 
-    @Column(nullable = false, length = 100)
-    private String venue;
+    @Enumerated(EnumType.STRING)
+    // Enum의 이름을 문자열로 저장하도록 지정하는 어노테이션
+    @Column(nullable = false, length = 30)
+    private VenueType venue;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -37,13 +51,17 @@ public class Performance {
     protected Performance() {
     }
 
-    public Performance(Club club, String title, String description,
-                       int price, String posterPath, String venue) {
+    public Performance(
+            Club club,
+            String title,
+            String description,
+            int price,
+            VenueType venue
+    ) {
         this.club = club;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.posterPath = posterPath;
         this.venue = venue;
         this.status = PerformanceStatus.DRAFT;
     }
@@ -53,17 +71,27 @@ public class Performance {
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public int getPrice() { return price; }
-    public String getPosterPath() { return posterPath; }
-    public String getVenue() { return venue; }
+    public VenueType getVenue() { return venue; }
     public PerformanceStatus getStatus() { return status; }
 
-    public void update(String title, String description, int price,
-                       String posterPath, String venue) {
+    public void update(
+            String title,
+            String description,
+            int price,
+            VenueType venue
+    ) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.posterPath = posterPath;
         this.venue = venue;
+    }
+
+    public void replacePoster(Attachment poster) {
+        this.poster = poster;
+    }
+
+    public Attachment getPoster() {
+        return poster;
     }
 
     public void changeStatus(PerformanceStatus status) {
