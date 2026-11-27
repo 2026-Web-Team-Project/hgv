@@ -38,4 +38,24 @@ public class User {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    protected User() {
+    }
+
+    public User(String googleSub, String schoolEmail, String name) {
+        this.googleSub = googleSub;
+        this.schoolEmail = schoolEmail;
+        this.name = name;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Long getId() { return id; }
+    public String getGoogleSub() { return googleSub; }
+    public String getSchoolEmail() { return schoolEmail; }
+    public String getName() { return name; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+
 }
