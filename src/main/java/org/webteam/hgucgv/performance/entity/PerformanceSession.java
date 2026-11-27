@@ -1,0 +1,58 @@
+package org.webteam.hgucgv.performance.entity;
+
+import jakarta.persistence.*;
+import org.webteam.hgucgv.entity.SessionStatus;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(
+    name = "performance_sessions",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"performance_id", "start_at"})
+)
+public class PerformanceSession {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "performance_id", nullable = false)
+    private Performance performance;
+
+    // 해당 날짜의 1공, 2공, 3공, 4공을 뜻함
+    @Column(nullable = false)
+    private int sessionNo;
+
+    @Column(name = "start_at", nullable = false)
+    private LocalDateTime startAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private SessionStatus status;
+
+    protected PerformanceSession() {
+    }
+
+    public PerformanceSession(Performance performance, int sessionNo,
+                              LocalDateTime startAt) {
+        this.performance = performance;
+        this.sessionNo = sessionNo;
+        this.startAt = startAt;
+        this.status = SessionStatus.OPEN;
+    }
+
+    public Long getId() { return id; }
+    public Performance getPerformance() { return performance; }
+    public int getSessionNo() { return sessionNo; }
+    public LocalDateTime getStartAt() { return startAt; }
+    public SessionStatus getStatus() { return status; }
+
+    public void updateSchedule(int sessionNo, LocalDateTime startAt) {
+        this.sessionNo = sessionNo;
+        this.startAt = startAt;
+    }
+
+    public void changeStatus(SessionStatus status) {
+        this.status = status;
+    }
+}
