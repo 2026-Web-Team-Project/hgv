@@ -36,4 +36,16 @@ public class ClubAdmin {
     @JoinColumn(name = "club_id", nullable = false)
     private Club club;
 
+    protected ClubAdmin() {
+    }
+
+    public ClubAdmin(User user, Club club) {
+        this.user = user;
+        this.club = club;
+    }
+
+    public Long getId() { return id; }
+    public User getUser() { return user; }
+    public Club getClub() { return club; }
+
 }

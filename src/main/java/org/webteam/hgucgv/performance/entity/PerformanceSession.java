@@ -29,7 +29,7 @@ public class PerformanceSession {
     @JoinColumn(name = "performance_id", nullable = false)
     private Performance performance;
 
-    @OneToMany(mappedBy = "session")
+    @OneToMany(mappedBy = "performanceSession")
     private List<SessionSeat> seats = new ArrayList<>();
 
     // 해당 날짜의 1공, 2공, 3공, 4공

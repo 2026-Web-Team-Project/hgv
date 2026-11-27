@@ -74,12 +74,24 @@ public class Performance {
     public VenueType getVenue() { return venue; }
     public PerformanceStatus getStatus() { return status; }
 
-    public void update(String title, String description, int price,
-                       String posterPath, VenueType venue) {
+    public void update(
+            String title,
+            String description,
+            int price,
+            VenueType venue
+    ) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.venue = venue;
+    }
+
+    public void replacePoster(Attachment poster) {
+        this.poster = poster;
+    }
+
+    public Attachment getPoster() {
+        return poster;
     }
 
     public void changeStatus(PerformanceStatus status) {
