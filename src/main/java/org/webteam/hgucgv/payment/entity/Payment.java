@@ -1,8 +1,7 @@
-package org.webteam.hgucgv.entity;
+package org.webteam.hgucgv.payment.entity;
 
 import jakarta.persistence.*;
-import org.webteam.hgucgv.entity.PaymentStatus;
-import org.webteam.hgucgv.entity.Reservation;
+import org.webteam.hgucgv.reservation.entity.Reservation;
 
 import java.time.LocalDateTime;
 
