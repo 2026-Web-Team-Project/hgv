@@ -1,7 +1,7 @@
 package org.webteam.hgucgv.dto;
 
-import org.webteam.hgucgv.entity.Payment;
-import org.webteam.hgucgv.entity.ReservationStatus;
+import org.webteam.hgucgv.payment.entity.Payment;
+import org.webteam.hgucgv.reservation.entity.ReservationStatus;
 
 /*
  * 예약/결제 결과 응답 DTO

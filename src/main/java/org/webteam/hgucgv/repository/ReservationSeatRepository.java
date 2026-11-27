@@ -1,7 +1,7 @@
 package org.webteam.hgucgv.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.webteam.hgucgv.entity.ReservationSeat;
+import org.webteam.hgucgv.reservation.entity.ReservationSeat;
 
 import java.util.List;
 

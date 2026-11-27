@@ -88,23 +88,4 @@ public class Payment {
     public void markCanceled() {
         this.status = PaymentStatus.CANCELED;
     }
-
-    protected Payment() {
-    }
-
-    public Payment(
-            Reservation reservation,
-            String orderId,
-            int amount
-    ) {
-        this.reservation = reservation;
-        this.orderId = orderId;
-        this.amount = amount;
-        this.status = PaymentStatus.READY;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 }
